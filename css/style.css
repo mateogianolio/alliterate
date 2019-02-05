@@ -1,0 +1,148 @@
+body {
+  font-family: expo-serif-pro, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 960px;
+  margin: 0 auto;
+  font-size: 150%;
+  margin-top: 2em;
+}
+
+section {
+  margin-bottom: .5em;
+}
+
+input {
+  margin-bottom: .5em;
+  padding: .5em;
+  font-family: inherit;
+  font-size: 1.15em;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: .25em;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+  text-align: center;
+}
+
+input:focus {
+  color: #000;
+  text-shadow: none;
+  background: #fff;
+  outline: 0;
+  text-align: left;
+  cursor: text;
+}
+
+[data-logo] { 
+  height: 50px;
+  margin-bottom: .5em;
+  overflow: visible;
+}
+
+[data-description] {
+  margin-bottom: .5em;
+  overflow: visible;
+}
+
+[data-share] { margin-top: .75em; }
+
+[data-letter] {
+  margin-top: -.25em;
+  font-size: 2.5em;
+  font-weight: normal;
+  overflow: visible;
+}
+
+[data-answers] {
+  font-size: 1em;
+  overflow: visible;
+}
+
+[data-answers] span {
+  margin-right: .5em;
+  transition: opacity .5s;
+  cursor: default;
+}
+
+[data-answers] span:hover {
+  opacity: 1 !important;
+}
+
+[data-answers] span:before {
+  content: attr(title);
+  padding: .25em .5em;
+  margin-right: .25em;
+  font-size: .5em;
+  background: #49a34b;
+  color: #fff;
+  border-radius: .25em 0 .25em .25em;
+  cursor: default;
+  z-index: 999;
+}
+
+[data-points], [data-time] {
+  line-height: 1;
+  text-align: left;
+}
+
+[data-points],
+[data-highscore] { text-align: right; }
+
+[data-points] b,
+[data-highscore] b,
+[data-time] b {
+  display: inline-block;
+  font-size: 1em;
+  font-weight: normal;
+  color: #fff;
+  background: #000;
+  border-radius: .25em 0 .25em .25em;
+  padding: .35em .5em;
+  margin-top: .25em;
+}
+
+[data-highscore] b { background: #49a34b; }
+[data-time] b { border-radius: 0 .25em .25em .25em; }
+[data-right] { text-align: right; }
+
+[data-subtitle] {
+  margin-top: .25em;
+  font-size: .5em;
+  font-weight: normal;
+}
+
+@media screen and (max-width: 960px) {
+  body { width: 90%; }
+  
+  [data-played] { display: none; }
+  [data-share] { text-align: center; }
+  
+  [data-letters] > * {
+    padding: 0 30% 0 0;
+    width: 47%;
+  }
+  
+  [data-letters] h1 {
+    padding: 0 0 0 30%;
+    text-align: right;
+  }
+  
+  [data-letter] { margin-top: -.25em; }
+  
+  [data-answers],
+  [data-description],
+  [data-highscore] b { font-size: .75em; }
+  
+  [data-logo] img {
+    width: 125px;
+    height: auto;
+  }
+  
+  .fb-like { visibility: none !important; }
+}
+
+@media screen and (max-width: 480px) {
+  body { font-size: 125%; width: 100%; }
+}
