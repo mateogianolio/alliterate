@@ -1,30 +1,9 @@
-/*
-==============================================
-CSS3 ANIMATION CHEAT SHEET
-==============================================
-
-Made by Justin Aguilar
-
-www.justinaguilar.com/animations/
-
-Questions, comments, concerns, love letters:
-justin@justinaguilar.com
-==============================================
-*/
-
-/*
-==============================================
-expandOpen
-==============================================
-*/
-
-
 .expandOpen{
 	animation-name: expandOpen;
 	-webkit-animation-name: expandOpen;	
 
-	animation-duration: 1.2s;	
-	-webkit-animation-duration: 1.2s;
+	animation-duration: 0.8s;	
+	-webkit-animation-duration: 0.8s;
 
 	animation-timing-function: ease-out;	
 	-webkit-animation-timing-function: ease-out;	
@@ -34,7 +13,7 @@ expandOpen
 
 @keyframes expandOpen {
 	0% {
-		transform: scale(1.8);		
+		transform: scale(1.4);
 	}
 	50% {
 		transform: scale(0.95);
@@ -52,7 +31,7 @@ expandOpen
 
 @-webkit-keyframes expandOpen {
 	0% {
-		-webkit-transform: scale(1.8);		
+		-webkit-transform: scale(1.4);
 	}
 	50% {
 		-webkit-transform: scale(0.95);
@@ -66,45 +45,4 @@ expandOpen
 	100% {
 		-webkit-transform: scale(1);
 	}					
-}
-
-/*
-==============================================
-tossing
-==============================================
-*/
-
-.tossing{
-	animation-name: tossing;
-	-webkit-animation-name: tossing;	
-
-	animation-duration: 2.5s;	
-	-webkit-animation-duration: 2.5s;
-
-	animation-iteration-count: infinite;
-	-webkit-animation-iteration-count: infinite;
-}
-
-@keyframes tossing {
-	0% {
-		transform: rotate(-4deg);	
-	}
-	50% {
-		transform: rotate(4deg);
-	}
-	100% {
-		transform: rotate(-4deg);	
-	}						
-}
-
-@-webkit-keyframes tossing {
-	0% {
-		-webkit-transform: rotate(-4deg);	
-	}
-	50% {
-		-webkit-transform: rotate(4deg);
-	}
-	100% {
-		-webkit-transform: rotate(-4deg);	
-	}				
 }

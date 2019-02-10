@@ -35,14 +35,18 @@ input:focus {
   cursor: text;
 }
 
-[data-logo] { 
-  height: 50px;
+[data-logo], [data-logo] > a {
   margin-bottom: .5em;
   overflow: visible;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 1.5em;
+  color: #000;
+  letter-spacing: -4px;
 }
 
 [data-description] {
-  margin-bottom: .5em;
+  margin-bottom: 1.5em;
   overflow: visible;
 }
 
@@ -55,22 +59,26 @@ input:focus {
   overflow: visible;
 }
 
+[data-letter] div {
+  display: inline-block;
+}
+
 [data-answers] {
   font-size: 1em;
   overflow: visible;
 }
 
-[data-answers] span {
+[data-answers] div {
   margin-right: .5em;
   transition: opacity .5s;
   cursor: default;
 }
 
-[data-answers] span:hover {
+[data-answers] div:hover {
   opacity: 1 !important;
 }
 
-[data-answers] span:before {
+[data-answers] div:before {
   content: attr(title);
   padding: .25em .5em;
   margin-right: .25em;
@@ -92,6 +100,7 @@ input:focus {
 
 [data-points] b,
 [data-highscore] b,
+[data-rank] b,
 [data-time] b {
   display: inline-block;
   font-size: 1em;
@@ -103,8 +112,10 @@ input:focus {
   margin-top: .25em;
 }
 
-[data-highscore] b { background: #49a34b; }
-[data-time] b { border-radius: 0 .25em .25em .25em; }
+[data-time] b,
+[data-rank] b
+{ border-radius: 0 .25em .25em .25em; }
+
 [data-right] { text-align: right; }
 
 [data-subtitle] {
@@ -120,27 +131,21 @@ input:focus {
   [data-share] { text-align: center; }
   
   [data-letters] > * {
-    padding: 0 30% 0 0;
-    width: 47%;
-  }
-  
-  [data-letters] h1 {
-    padding: 0 0 0 30%;
-    text-align: right;
+    width: 100%;
+    text-align: center;
   }
   
   [data-letter] { margin-top: -.25em; }
   
   [data-answers],
   [data-description],
-  [data-highscore] b { font-size: .75em; }
-  
-  [data-logo] img {
-    width: 125px;
-    height: auto;
+  [data-highscore] b,
+  [data-rank] b { font-size: .75em; }
+
+  [data-highscore], [data-rank] {
+    margin-top: 4em;
+    margin-bottom: 1em;
   }
-  
-  .fb-like { visibility: none !important; }
 }
 
 @media screen and (max-width: 480px) {
