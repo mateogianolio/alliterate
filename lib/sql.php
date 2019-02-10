@@ -8,55 +8,41 @@ if ($sql->connect_errno) {
   die($sql->error);
 }
 
-function getHighscore($ip) {
+function q($query) {
   global $sql;
+  return $sql->query($query);
+}
 
+function getHighscore($ip) {
   $response = array(
     'highscore' => 0,
-    'rank' => 0,
+    'rank' => 1,
     'played' => 0,
     'top' => 0,
     'users' => 0,
   );
 
-  $query = 'SELECT * FROM scores WHERE ip = "' . $ip . '" ORDER BY score DESC LIMIT 1';
-  $result = $sql->query($query);
+  $result = q('SELECT * FROM scores WHERE ip = "' . $ip . '" ORDER BY score DESC LIMIT 1');
+  $response['highscore'] = $result->num_rows ? intval($result->fetch_assoc()['score']) : 0;
 
-  $row = $result->fetch_assoc();
-  $response['highscore'] = $result->num_rows ? intval($row['score']) : 0;
-
-  $query = 'SELECT * FROM scores WHERE score > ' . $response['highscore'] . ' ORDER BY score DESC';
-  $result = $sql->query($query);
-
-  $response['rank'] = 1 + $result->num_rows;
-  
-  $row = $result->fetch_assoc();
-  
+  $result = q('SELECT * FROM scores WHERE score > ' . $response['highscore'] . ' ORDER BY score DESC');
   if ($result->num_rows) {
-    $response['top'] = $row['score'];
+    $response['rank'] = 1 + $result->num_rows;
+    $response['top'] = $result->fetch_assoc()['score'];
   }
 
-  $query = 'SELECT COUNT(*) FROM scores';
-  $result = $sql->query($query);
+  $result = q('SELECT COUNT(*) FROM scores');
+  $response['played'] = $result->fetch_assoc()['COUNT(*)'];
 
-  $row = $result->fetch_assoc();
-  $response['played'] = $row['COUNT(*)'];
+  q('INSERT INTO users (ip, last_activity) VALUES ("' . $ip . '", NOW()) ON DUPLICATE KEY UPDATE last_activity = NOW()');
 
-  $query = 'INSERT INTO users (ip, last_activity) VALUES ("' . $ip . '", NOW()) ON DUPLICATE KEY UPDATE last_activity = NOW()';
-  $result = $sql->query($query);
-
-  $query = 'SELECT COUNT(*) FROM users WHERE last_activity > NOW() - INTERVAL 5 MINUTE';
-  $result = $sql->query($query);
-
-  $row = $result->fetch_assoc();
-  $response['users'] = $row['COUNT(*)'];
+  $result = q('SELECT COUNT(*) FROM users WHERE last_activity > NOW() - INTERVAL 5 MINUTE');
+  $response['users'] = $result->fetch_assoc()['COUNT(*)'];
 
   return json_encode($response);
 }
 
 function verify($ip, $time, $words, $score, $letters) {
-  global $sql;
-
   if (round(floatval($time)) != 60) {
     return 'wrong time';
   }
@@ -66,35 +52,24 @@ function verify($ip, $time, $words, $score, $letters) {
       return 'wrong letter';
     }
   
-    $query = 'SELECT * FROM words WHERE word = "' . $word . '" LIMIT 1';
-    $result = $sql->query($query);
-    
+    $result = q('SELECT * FROM words WHERE word = "' . $word . '" LIMIT 1');
     if (!$result->num_rows) {
       return 'wrong word';
     }
   }
   
-  $query = 'INSERT INTO scores (ip, score) VALUES("' . $ip . '", "' . $score . '")';
-  $result = $sql->query($query);
-
-  $query = 'INSERT INTO users (ip, last_activity) VALUES ("' . $ip . '", NOW()) ON DUPLICATE KEY UPDATE last_activity = NOW()';
-  $result = $sql->query($query);
+  q('INSERT INTO scores (ip, score) VALUES("' . $ip . '", "' . $score . '")');
+  q('INSERT INTO users (ip, last_activity) VALUES ("' . $ip . '", NOW()) ON DUPLICATE KEY UPDATE last_activity = NOW()');
 
   return 'success';
 }
 
 function getWord($word) {
-  global $sql;
-
   if (empty($word)) {
     return '';
   }
 
-  $query = 'SELECT * FROM words WHERE word = "' . $word . '" LIMIT 1';
-  $result = $sql->query($query);
-
-  $row = $result->fetch_assoc();
-
-  return json_encode($row);
+  $result = q('SELECT * FROM words WHERE word = "' . $word . '" LIMIT 1');
+  return json_encode($result->fetch_assoc());
 }
 ?>
