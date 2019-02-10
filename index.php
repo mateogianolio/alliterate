@@ -94,5 +94,14 @@
       </section>
     </div>
     <script src="lib/game.js"></script>
+    <div data-grid>
+      <section data-footer>
+        <div data-size="1/6"></div>
+        <div data-size="4/6">
+          Scores are calculated based on the <a href="https://en.wikipedia.org/wiki/Scrabble_letter_distributions#English">scrabble letter distribution</a>.
+        </div>
+        <div data-size="1/6"></div>
+      </section>
+    </div>
   </body>
 </html>

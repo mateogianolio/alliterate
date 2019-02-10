@@ -124,6 +124,16 @@ input:focus {
   font-weight: normal;
 }
 
+[data-footer] {
+  margin-top: 2em;
+  font-size: .5em;
+}
+
+[data-footer] a {
+  text-decoration: none;
+  color: '#000';
+}
+
 @media screen and (max-width: 960px) {
   body { width: 90%; }
   
